@@ -209,19 +209,19 @@ namespace Microsoft.Azure.Relay.Bridge.Test
                     l.Bind(new UnixDomainSocketEndPoint(rf.LocalSocket));
                     l.Listen(5);
 
-                    l.AcceptAsync().ContinueWith((t) =>
-                    {
-                        var c = t.Result;
-                        using (var b = new StreamReader(new NetworkStream(c)))
+                        l.AcceptAsync().ContinueWith((t) =>
                         {
-                            var text = b.ReadLine();
-                            using (var w = new StreamWriter(new NetworkStream(c)))
+                            var c = t.Result;
+                            using (var b = new StreamReader(new NetworkStream(c)))
                             {
-                                w.WriteLine(text);
-                                w.Flush();
+                                var text = b.ReadLine();
+                                using (var w = new StreamWriter(new NetworkStream(c)))
+                                {
+                                    w.WriteLine(text);
+                                    w.Flush();
+                                }
                             }
-                        }
-                    });
+                        });
 
                     using (var s = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.IP))
                     {
