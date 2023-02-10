@@ -176,7 +176,7 @@ import it into your docker image repository using `docker load -i
 azbridge-oci-image-x.x.x.tar`. 
 
 The docker image's entry point is the azbridge tool itself, meaning you can run
-the container with `docker run --rm -it azbridge {parameters}`. 
+the container with `docker run --rm -it azbridge:<TAG> {parameters}`. 
 
 If you want to use the image as a base image to override the entry point, the
 configured entry point for the installed runtime is at `app/azbridge`. 
